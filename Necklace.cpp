@@ -1,8 +1,27 @@
 #include<iostream>
 #include<GL/glut.h>
 #include<cmath>
-
 using namespace std;
+
+void plot(int,int);
+void midpoint(float,float,float);
+void dda(float,float,float,float);
+void display();
+
+
+int main(int argc,char **argv)
+{
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(1366, 768);
+	glutInitWindowPosition(100,100);
+	glutCreateWindow("Necklace");
+	init();
+	glutDisplayFunc(display);
+	glutMainLoop();
+	return 0;
+}
+
 
 void plot(int x,int y)
 {
@@ -11,18 +30,9 @@ void plot(int x,int y)
 	glEnd();
 }
 
-void init(void)
-{
-	glClearColor(0.0,0.0,0.0,0.0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-780,780,-420,420);
-}
-
-void drawMidpoint(float cx, float cy, float r1)
-{
+void midpoint(float cx, float cy, float r1)
+{	
 	float x, y, p;
-	
 	p = 5/4 - r1;
 	x = 0;
 	y = r1;
@@ -53,11 +63,10 @@ void drawMidpoint(float cx, float cy, float r1)
 	
 }
 
-void drawlineDDA(float x1,float y1,float x2,float y2)
+void dda(float x1,float y1,float x2,float y2)
 {
 	float x,y,Xin,Yin,dy,dx,length;
-	int i;
-	
+	int i;	
 	dx=x2-x1;
 	dy=y2-y1;
 	
@@ -82,69 +91,61 @@ void drawlineDDA(float x1,float y1,float x2,float y2)
 }
 
 
-void displayMidpoint()
+void display()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	
+	glClearColor(0.0,0.0,0.0,0.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-780,780,-420,420);
+	glClear(GL_COLOR_BUFFER_BIT);	
 	glPointSize(1.0);
+	
 	//Chain
 	glColor3f(0.8066,0.7066,0.22);
-     drawMidpoint(0,0,20);
-     drawMidpoint(-40,15,20);
-     drawMidpoint(40,15,20);
-     drawMidpoint(-80,35,20);
-     drawMidpoint(80,35,20);
+     midpoint(0,0,20);
+     midpoint(-40,15,20);
+     midpoint(40,15,20);
+     midpoint(-80,35,20);
+     midpoint(80,35,20);
      
-     drawMidpoint(-110,60,15);
-     drawMidpoint(110,60,15);
-     drawMidpoint(-130,85,15);
-     drawMidpoint(130,85,15);
+     midpoint(-110,60,15);
+     midpoint(110,60,15);
+     midpoint(-130,85,15);
+     midpoint(130,85,15);
      
 	glColor3f(0.7733,0.5566,0.00);     
-     drawMidpoint(-142,110,10);
-     drawMidpoint(142,110,10);
-     drawMidpoint(-147,130,10);
-     drawMidpoint(147,130,10);
-     drawMidpoint(-151,150,10);
-     drawMidpoint(151,150,10);
-     drawMidpoint(-154,170,10);
-     drawMidpoint(154,170,10);
-     drawMidpoint(-156,190,10);
-     drawMidpoint(156,190,10);
+     midpoint(-142,110,10);
+     midpoint(142,110,10);
+     midpoint(-147,130,10);
+     midpoint(147,130,10);
+     midpoint(-151,150,10);
+     midpoint(151,150,10);
+     midpoint(-154,170,10);
+     midpoint(154,170,10);
+     midpoint(-156,190,10);
+     midpoint(156,190,10);
      
      //Small pattern
      glColor3f(0.7,0.0,0.0);
-     drawMidpoint(0,-30,10);
-     drawMidpoint(0,-45,5);
-     drawMidpoint(0,-55,5);   
+     midpoint(0,-30,10);
+     midpoint(0,-45,5);
+     midpoint(0,-55,5);   
     
-     drawMidpoint(-20,-25,10);
-     drawMidpoint(-32,-38,5);
-     drawMidpoint(-40,-47,5);
+     midpoint(-20,-25,10);
+     midpoint(-32,-38,5);
+     midpoint(-40,-47,5);
      
-     drawMidpoint(20,-25,10);
-     drawMidpoint(32,-38,5);
-     drawMidpoint(40,-47,5);
+     midpoint(20,-25,10);
+     midpoint(32,-38,5);
+     midpoint(40,-47,5);
      
      //coordinates
      glColor3f(0.3,0.3,0.3);
      glPointSize(1.0);
-     drawlineDDA(-780,0,780,0);
-     drawlineDDA(0,420,0,-420);
+     dda(-780,0,780,0);
+     dda(0,420,0,-420);
      
    	glFlush();
 }
 
-int main(int argc,char **argv)
-{
-	glutInit(&argc,argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(1366, 768);
-	glutInitWindowPosition(100,100);
-	glutCreateWindow("Spectacles");
-	init();
-	glutDisplayFunc(displayMidpoint);
-	glutMainLoop();
 
-	return 0;
-}
