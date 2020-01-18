@@ -16,7 +16,6 @@ int main(int argc,char **argv)
 	glutInitWindowSize(1366, 768);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("Necklace");
-	init();
 	glutDisplayFunc(display);
 	glutMainLoop();
 	return 0;
