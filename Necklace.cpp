@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include<GL/glut.h>
 #include<cmath>
@@ -88,24 +87,52 @@ void displayMidpoint()
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	glPointSize(1.0);
-	glColor3f(1.0,1.0,1.0);
+	//Chain
+	glColor3f(0.8066,0.7066,0.22);
      drawMidpoint(0,0,20);
      drawMidpoint(-40,15,20);
      drawMidpoint(40,15,20);
      drawMidpoint(-80,35,20);
      drawMidpoint(80,35,20);
+     
      drawMidpoint(-110,60,15);
      drawMidpoint(110,60,15);
-     drawMidpoint(-135,90,15);
-     drawMidpoint(135,90,15);
-     drawMidpoint(-170,0,10);
-     drawMidpoint(170,0,10);
-     drawMidpoint(-190,0,10);
-     drawMidpoint(190,0,10);
+     drawMidpoint(-130,85,15);
+     drawMidpoint(130,85,15);
      
+	glColor3f(0.7733,0.5566,0.00);     
+     drawMidpoint(-142,110,10);
+     drawMidpoint(142,110,10);
+     drawMidpoint(-147,130,10);
+     drawMidpoint(147,130,10);
+     drawMidpoint(-151,150,10);
+     drawMidpoint(151,150,10);
+     drawMidpoint(-154,170,10);
+     drawMidpoint(154,170,10);
+     drawMidpoint(-156,190,10);
+     drawMidpoint(156,190,10);
      
+     //Small pattern
+     glColor3f(0.7,0.0,0.0);
+     drawMidpoint(0,-30,10);
+     drawMidpoint(0,-45,5);
+     drawMidpoint(0,-55,5);   
+    
+     drawMidpoint(-20,-25,10);
+     drawMidpoint(-32,-38,5);
+     drawMidpoint(-40,-47,5);
      
-	glFlush();
+     drawMidpoint(20,-25,10);
+     drawMidpoint(32,-38,5);
+     drawMidpoint(40,-47,5);
+     
+     //coordinates
+     glColor3f(0.3,0.3,0.3);
+     glPointSize(1.0);
+     drawlineDDA(-780,0,780,0);
+     drawlineDDA(0,420,0,-420);
+     
+   	glFlush();
 }
 
 int main(int argc,char **argv)
