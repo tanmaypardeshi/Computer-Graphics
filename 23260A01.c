@@ -19,7 +19,7 @@ int main(int argc, char** argv)
      glutInitDisplayMode (GLUT_SINGLE);
      glutInitWindowSize (700, 700);
      glutInitWindowPosition (500,0);
-     glutCreateWindow ("DDA Assignment 1");
+     glutCreateWindow ("Assignment 1");
      
      int choice;
      printf("\n1. DDA algorithm\n");
