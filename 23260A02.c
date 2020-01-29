@@ -1,3 +1,14 @@
+/*
+===========================================================
+Roll number:- 23260
+Batch:- H 10
+Problem Definition:- Draw inscribed and Circumscribed 
+circles in the triangle as shown as an example below 
+using circle drawing algorithm
+Date of Performance:- 
+===========================================================
+*/
+
 #include<GL/glut.h>
 #include<stdlib.h>
 #include<stdio.h>
