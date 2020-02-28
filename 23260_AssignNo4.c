@@ -20,7 +20,10 @@ pixel b_clr,f_clr;
 void initialize()
 {
 	float X1,Y1;
-	scanf("%f%f",&X,&Y);
+	printf("Enter x coordinate:- ");
+	scanf("%f",&X);
+	printf("Enter y coordinate:- ");
+	scanf("%f",&Y);
 	X1=X;
 	Y1=Y;
 	for(int i=0;i<10;i+=2)
