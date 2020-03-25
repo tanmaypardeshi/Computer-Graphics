@@ -1,3 +1,12 @@
+/*
+===========================================================
+Roll number:- 23260
+Batch:- H 10
+Problem Definition:- Mouse Click
+Date of Performance:- 
+===========================================================
+*/
+
 #include<GL/glut.h>
 #include<stdio.h>
 #include<math.h>

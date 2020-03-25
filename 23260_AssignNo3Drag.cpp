@@ -1,3 +1,13 @@
+/*
+===========================================================
+Roll number:- 23260
+Batch:- H 10
+Problem Definition:- Mouse Drag
+Date of Performance:- 
+===========================================================
+*/
+
+
 #include<GL/gl.h>
 #include <GL/glut.h>
 #include <math.h>

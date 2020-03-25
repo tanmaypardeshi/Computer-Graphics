@@ -1,7 +1,7 @@
 /*
 ===========================================================
-Roll number:- 23260
-Batch:- H 10
+Roll number:- 23211
+Batch:- E 10
 Problem Definition:- Draw a 4x4 chessboard rotated 45 
 degrees with horizontal axis. Use bresenham algorithm
 to draw all the lines. Use seed fill algorithm to fill
