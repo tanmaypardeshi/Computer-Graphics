@@ -1,3 +1,10 @@
+/*
+===========================================================
+Roll number:- 23260
+Batch:- H 10
+Problem Definition:- Generate fractal patterns by using Koch curves
+===========================================================
+*/
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
