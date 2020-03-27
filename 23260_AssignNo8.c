@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
 	glutInitWindowPosition(0,0);
 	glutInitWindowSize(500,500);
-	glutCreateWindow("Koch Snowflake");
+	glutCreateWindow("Assignment 8");
 	glutDisplayFunc(mydisplay);
 	glutMainLoop();
 }

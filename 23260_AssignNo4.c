@@ -226,7 +226,7 @@ int main(int argc,char **argv)
 	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
 	glutInitWindowPosition(0,0);
 	glutInitWindowSize(750,750);
-    glutCreateWindow("Chessboard");
+    glutCreateWindow("Assignment 4");
 	init();
 	glutDisplayFunc(draw);
 	glutMainLoop();

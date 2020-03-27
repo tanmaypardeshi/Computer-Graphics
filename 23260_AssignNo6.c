@@ -13,44 +13,153 @@ rhombus.
 #include <stdlib.h>
 #include <math.h>
 
+void TriRenderFunc();
+void RhoRenderFunc();
+void init_mat_tri();
+void init_mat_rho();
+void DDA(int,int,int,int);
+void matmul();
+void matmul_rho();
+void translate_Tri();
+void translate_Rho();
+void rotate_Tri();
+void rotate_Rho();
+void shear_Tri();
+void shear_Rho();
+void scale_Tri();
+void scale_Rho();
+
 int orig[10][3];
 float trans[3][3], final[10][3];
 
-void DDA(int x1, int y1, int x2, int y2)
+int main(int argc, char**argv)
 {
-    int dx, dy, i;
-    float xinc, yinc, x, y, steps;
+    int choice;
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(0, 0);
+    glutCreateWindow("Assignment 6");
     
-    x = x1;
-    y = y1;
-    dx = x2 - x1;
-    dy = y2 - y1;
-    printf("\nx2 : %d and y2 : %d", x2, y2);
-    printf("\nx1 : %d and y1 : %d", x1, y1);
-    printf("\ndx : %d and dy : %d", dx, dy);
-    if(dx > dy)
-        steps = abs(dx);
-    else
-        steps = abs(dy);
-    xinc = dx/steps;
-    yinc = dy/steps;
-    
-    printf("\nxinc : %f and yinc : %f", xinc, yinc);
-    glBegin(GL_POINTS);
-    glVertex2i(x, y);
-    glEnd();
-    
-    for(i =0; i < (steps - 1); i++)
+    printf("\nChoose from the following: ");
+    printf("\n1. Equilateral Triangle");
+    printf("\n2. Rhombus");
+    printf("\n3. Exit");
+    printf("\nEnter your choice: ");
+    scanf("%d", &choice);
+    switch(choice)
     {
-        x += xinc;
-        y += yinc;
-        glBegin(GL_POINTS);
-        glVertex2i(x, y);
-        glEnd();
-        //printf("\nx : %f and y : %f", x, y);
+        case 1: 
+        	glutDisplayFunc(TriRenderFunc);
+            glutMainLoop();
+            break;
+        case 2: 
+        	glutDisplayFunc(RhoRenderFunc);
+            glutMainLoop();
+            break;
+        case 3: 
+    	    return 0;
+	}
+	return 0;
+}
+
+void TriRenderFunc()
+{
+    int choice;
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    gluOrtho2D(-1000, 1000, -1000, 1000);
+    
+    glColor3f(0.5, 0.5, 0.5);
+    DDA(0, -1000, 0, 1000);
+    DDA( -1000, 0, 1000, 0);
+    
+    //original Figure
+    init_mat_tri();
+    glColor3f(0.0, 1.0, 0.0);
+    DDA(orig[0][0], orig[0][1], orig[1][0], orig[1][1]);
+    DDA(orig[1][0], orig[1][1], orig[2][0], orig[2][1]);
+    DDA(orig[0][0], orig[0][1], orig[2][0], orig[2][1]);
+
+    
+    printf("\nChoose from the following: ");
+    printf("\n1. Translation");
+    printf("\n2. Rotation");
+    printf("\n3. Shear ");
+    printf("\n4. Scaling ");
+    printf("\nEnter your choice: ");
+    scanf("%d", &choice);
+    switch(choice)
+    {
+        case 1: translate_Tri();
+            break;
+        case 2: rotate_Tri();
+            break;
+        case 3: shear_Tri();
+            break;
+        case 4: scale_Tri();
+            break;
     }
-    glFlush();
-        
+    
+}
+
+void RhoRenderFunc()
+{
+    int choice;
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    gluOrtho2D(-1000, 1000, -1000, 1000);
+    
+    glColor3f(0.5, 0.5, 0.5);
+    DDA(0, -1000, 0, 1000);
+    DDA( -1000, 0, 1000, 0);
+    
+    //original Figure
+    init_mat_rho();
+    glColor3f(0.0, 1.0, 0.0);
+    DDA(orig[0][0], orig[0][1], orig[1][0], orig[1][1]);
+    DDA(orig[1][0], orig[1][1], orig[2][0], orig[2][1]);
+    DDA(orig[3][0], orig[3][1], orig[2][0], orig[2][1]);
+    DDA(orig[0][0], orig[0][1], orig[3][0], orig[3][1]);
+
+    
+    printf("\nChoose from the following: ");
+    printf("\n1. Translation");
+    printf("\n2. Rotation");
+    printf("\n3. Shear ");
+    printf("\n4. Scaling ");
+    printf("\nEnter your choice: ");
+    scanf("%d", &choice);
+    switch(choice)
+    {
+        case 1: translate_Rho();
+            break;
+        case 2: rotate_Rho();
+            break;
+        case 3: shear_Rho();
+            break;
+        case 4: scale_Rho();
+            break;
+    } 
+}
+
+void init_mat_tri()
+{
+    int i, size, x, y, j,length;
+    
+    for(i=0;i<10;i++)
+    {
+        orig[i][2] = 1;
+        final[i][2] = 1;
+    }
+    
+    orig[0][0] = 500;
+    orig[0][1] = 500;
+    orig[1][0] = 0;
+    orig[1][1] = -500;
+    orig[2][0] = 1000;
+    orig[2][1] = -500;
 }
 
 void init_mat_rho()
@@ -73,23 +182,39 @@ void init_mat_rho()
     orig[3][1] = 700;
 }
 
-void init_mat_tri()
+
+void DDA(int x1, int y1, int x2, int y2)
 {
-    int i, size, x, y, j;
+    int dx, dy, i;
+    float xinc, yinc, x, y, steps;
     
-    for(i=0;i<10;i++)
+    x = x1;
+    y = y1;
+    dx = x2 - x1;
+    dy = y2 - y1;
+    if(dx > dy)
+        steps = abs(dx);
+    else
+        steps = abs(dy);
+    xinc = dx/steps;
+    yinc = dy/steps;
+    
+    glBegin(GL_POINTS);
+    glVertex2i(x, y);
+    glEnd();
+    
+    for(i =0; i < (steps - 1); i++)
     {
-        orig[i][2] = 1;
-        final[i][2] = 1;
+        x += xinc;
+        y += yinc;
+        glBegin(GL_POINTS);
+        glVertex2i(x, y);
+        glEnd();
     }
-    
-    orig[0][0] = 500;
-    orig[0][1] = 500;
-    orig[1][0] = 0;
-    orig[1][1] = -500;
-    orig[2][0] = 1000;
-    orig[2][1] = -500;
+    glFlush();
+        
 }
+
 void matmul()
 {
     int i, j, k;
@@ -411,118 +536,4 @@ void scale_Rho()
     DDA(final[3][0], final[3][1], final[2][0], final[2][1]);
     DDA(final[0][0], final[0][1], final[3][0], final[3][1]);
     
-}
-
-
-void TriRenderFunc()
-{
-    int choice;
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    gluOrtho2D(-1000, 1000, -1000, 1000);
-    
-    glColor3f(0.5, 0.5, 0.5);
-    DDA(0, -1000, 0, 1000);
-    DDA( -1000, 0, 1000, 0);
-    
-    //original Figure
-    init_mat_tri();
-    glColor3f(0.0, 1.0, 0.0);
-    DDA(orig[0][0], orig[0][1], orig[1][0], orig[1][1]);
-    DDA(orig[1][0], orig[1][1], orig[2][0], orig[2][1]);
-    DDA(orig[0][0], orig[0][1], orig[2][0], orig[2][1]);
-
-    
-    printf("\nChoose from the following: ");
-    printf("\n1. Translation");
-    printf("\n2. Rotation");
-    printf("\n3. Shear ");
-    printf("\n4. Scaling ");
-    printf("\nEnter your choice: ");
-    scanf("%d", &choice);
-    switch(choice)
-    {
-        case 1: translate_Tri();
-            break;
-        case 2: rotate_Tri();
-            break;
-        case 3: shear_Tri();
-            break;
-        case 4: scale_Tri();
-            break;
-    }
-    
-}
-
-void RhoRenderFunc()
-{
-    int choice;
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    gluOrtho2D(-1000, 1000, -1000, 1000);
-    
-    glColor3f(0.5, 0.5, 0.5);
-    DDA(0, -1000, 0, 1000);
-    DDA( -1000, 0, 1000, 0);
-    
-    //original Figure
-    init_mat_rho();
-    glColor3f(0.0, 1.0, 0.0);
-    DDA(orig[0][0], orig[0][1], orig[1][0], orig[1][1]);
-    DDA(orig[1][0], orig[1][1], orig[2][0], orig[2][1]);
-    DDA(orig[3][0], orig[3][1], orig[2][0], orig[2][1]);
-    DDA(orig[0][0], orig[0][1], orig[3][0], orig[3][1]);
-
-    
-    printf("\nChoose from the following: ");
-    printf("\n1. Translation");
-    printf("\n2. Rotation");
-    printf("\n3. Shear ");
-    printf("\n4. Scaling ");
-    printf("\nEnter your choice: ");
-    scanf("%d", &choice);
-    switch(choice)
-    {
-        case 1: translate_Rho();
-            break;
-        case 2: rotate_Rho();
-            break;
-        case 3: shear_Rho();
-            break;
-        case 4: scale_Rho();
-            break;
-    }
-    
-}
-
-int main(int argc, char**argv)
-{
-    int choice;
-
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE);
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(0, 0);
-    glutCreateWindow("2D Transformations");
-    
-    printf("\nChoose from the following: ");
-    printf("\n1. Equilateral Triangle");
-    printf("\n2. Rhombus");
-    printf("\n3. Exit");
-    printf("\nEnter your choice: ");
-    scanf("%d", &choice);
-    switch(choice)
-    {
-        case 1: 
-        	glutDisplayFunc(TriRenderFunc);
-            glutMainLoop();
-            break;
-        case 2: 
-        	glutDisplayFunc(RhoRenderFunc);
-            glutMainLoop();
-            break;
-        case 3: 
-    	    return 0;
-	}
-	return 0;
 }

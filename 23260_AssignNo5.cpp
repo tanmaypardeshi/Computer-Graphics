@@ -13,18 +13,97 @@ interactively.
 #include<cmath>
 #include<GL/glut.h>
 #define PI 3.1415926535
-
 using namespace std;
+
+void plot(int, int , int , int);
+void lineClipping(int, int,int, int);
+void init();
+void display();
 
 int n;
 float wx1, wy1, wx2, wy2;
 float x[20], y[20];
 
+
+int main(int argc, char **argv)
+{
+	int choice;
+	
+	cout<<"\nEnter the diagonally opposite co-ordinates of the clipping window:- "<<endl;
+	cout<<"\nBottom point:- ";
+	cout<<"Enter x coorinate:- ";
+	cin>>wx1;
+	cout<<"Enter y coordinate:- ";
+	cin>>wy1;
+	cout<<"\nTop point:- ";
+	cout<<"Enter x coorinate:- ";
+	cin>>wx2;
+	cout<<"Enter y coordinate:- ";
+	cin>>wy2;
+	
+
+	cout<<"\nEnter the number of vertices of the polygon:- "<<endl;
+	cin>>n;
+	cout<<"\nEnter their coordinates:- "<<endl;
+	for(int i=0; i<n; i++)
+	{
+		cout<<"\nPoint "<<i+1<<":- "<<endl;
+		cout<<"Enter x coorinate:- ";
+		cin>>x[i];
+		cout<<"Enter y coordinate:- ";
+		cin>>y[i];
+		
+	}
+
+	
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(1366,768);
+	glutInitWindowPosition(100,100);
+	glutCreateWindow("Assignment 5");
+	
+	glClearColor(0.0,0.0,0.0,0.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-780,780,-420,420);
+
+	glutDisplayFunc(display);
+	glutMainLoop();
+	return 0;
+}
+
+void display()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	glColor3f(1.0,0.0,0.0);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(wx1,wy1);
+	glVertex2f(wx2,wy1);
+	glVertex2f(wx2,wy2);
+	glVertex2f(wx1,wy2);
+	glEnd();
+	
+	glPointSize(2.0);
+	glColor3f(1.0,1.0,0.0);
+	
+	if(n == 2)
+		lineClipping(x[0],y[0],x[1],y[1]);
+	else
+	{
+		for(int i=0; i<n; i++)
+			lineClipping(x[i],y[i],x[i+1],y[i+1]);
+		lineClipping(x[n-1],y[n-1],x[0],y[0]);
+	}
+	
+	glFlush();
+}
+
 void plot(int x1, int y1, int x2, int y2)
 {
 	glBegin(GL_LINES);
-		glVertex2f(x1, y1);
-		glVertex2f(x2, y2);
+	glVertex2f(x1, y1);
+	glVertex2f(x2, y2);
 	glEnd();
 }
 
@@ -205,69 +284,4 @@ void lineClipping(int x1, int y1,int x2, int y2)
 			plot(xa,ya,xb,yb);
 		}
 	}
-}
-
-void init()
-{
-	glClearColor(0.0,0.0,0.0,0.0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-780,780,-420,420);
-}
-
-void display()
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-	
-	glColor3f(1.0,0.0,0.0);
-	glBegin(GL_LINE_LOOP);
-		glVertex2f(wx1,wy1);
-		glVertex2f(wx2,wy1);
-		glVertex2f(wx2,wy2);
-		glVertex2f(wx1,wy2);
-	glEnd();
-	
-	glPointSize(2.0);
-	glColor3f(1.0,1.0,0.0);
-	
-	if(n == 2)
-		lineClipping(x[0],y[0],x[1],y[1]);
-	else
-	{
-		for(int i=0; i<n; i++)
-			lineClipping(x[i],y[i],x[i+1],y[i+1]);
-		lineClipping(x[n-1],y[n-1],x[0],y[0]);
-	}
-	
-	glFlush();
-}
-
-int main(int argc, char **argv)
-{
-	int choice;
-	
-	cout<<"\nEnter the diagonally opposite co-ordinates of the clipping window:-"<<endl;
-	cout<<"\nBottom point:- ";
-	cin>>wx1>>wy1;
-	cout<<"\nTop point:- ";
-	cin>>wx2>>wy2;
-	
-
-	cout<<"\nEnter x and y coordinates:- ";
-	for(int i=0; i<n; i++)
-	{
-		cout<<"\nPoint "<<i+1<<":- ";
-		cin>>x[i]>>y[i];
-	}
-
-	
-	glutInit(&argc,argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(1366,768);
-	glutInitWindowPosition(100,100);
-	glutCreateWindow("Clipping");
-	init();
-	glutDisplayFunc(display);
-	glutMainLoop();
-	return 0;
 }

@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
 	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
 	glutInitWindowPosition(200, 200);
 	glutInitWindowSize(640, 480);
-	glutCreateWindow("Mouse Func");
+	glutCreateWindow("Assignment 3 Drag");
 	glutDisplayFunc(display);
 	glutMouseFunc(myMouseFunc);
 	init();
