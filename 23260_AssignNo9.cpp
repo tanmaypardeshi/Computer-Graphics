@@ -1,12 +1,12 @@
-#include<math.h>
 #include<iostream>
+#include<math.h>
 #include<GL/glut.h>
 using namespace std;
 
 float inc=1.0;
 float angle=135;
 
-void drawCircle(float segments,float radius,float sx,float sy)
+float drawCircle(float segments,float radius,float sx,float sy)
 {
     glBegin(GL_LINE_LOOP);
     for(int i=0;i<segments;i++)
@@ -38,7 +38,7 @@ void draw(float x1,float y1,float angle)
     glEnd();
 
     //Drawing Hour Line
-    glColor3f(1,0,0);
+  	glColor3f(1,0,0);
     glLineWidth(2);
     glBegin(GL_LINES);
     glVertex2f(x1,y1);
@@ -68,41 +68,40 @@ void display()
     glLoadIdentity();
     glTranslatef(-10,10,-30);
     glColor3f(1,1,1);
-    if(angle>315)
-    {
-        angle=315;
-        inc=-inc;
-    }
-    if(angle<225)
-    {
-        angle=225;
-        inc=-inc;
-    }
+	if(angle>315)
+	{
+		angle=315;
+		inc=-inc;
+	}
+	if(angle<225)
+	{
+		angle=225;
+		inc=-inc;
+	}
     angle += inc;
     draw(0,0,angle);
     glutSwapBuffers();
-
 }
 
 void reshape(int w,int h)
 {
-    glMatrixMode (GL_PROJECTION);  //maps camera to screen
-    glLoadIdentity ();
-    gluPerspective (100, (GLfloat)w / (GLfloat)h, 0.5, 100.0);
-    glMatrixMode (GL_MODELVIEW);
+	glMatrixMode (GL_PROJECTION);  //maps camera to screen
+	glLoadIdentity ();
+	gluPerspective (100, (GLfloat)w / (GLfloat)h, 0.5, 100.0);
+	glMatrixMode (GL_MODELVIEW);
 }
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_DOUBLE);
-    glutInitWindowSize(800,600);
-    glutInitWindowPosition(0,0);
-    glutCreateWindow("Assignment 9");
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_DOUBLE);
+	glutInitWindowSize(800,600);
+	glutInitWindowPosition(0,0);
+	glutCreateWindow("Assignment 9");
 
-    glutDisplayFunc(display);
-    glutIdleFunc(display);
-    glutReshapeFunc(reshape);
-    glutMainLoop();
+	glutDisplayFunc(display);
+	glutIdleFunc(display);
+	glutReshapeFunc(reshape);
+	glutMainLoop();
     return 0;
 }
