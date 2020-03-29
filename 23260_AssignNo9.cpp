@@ -6,7 +6,7 @@ using namespace std;
 float inc=1.0;
 float angle=135;
 
-float drawCircle(float segments,float radius,float sx,float sy)
+void drawCircle(float segments,float radius,float sx,float sy)
 {
     glBegin(GL_LINE_LOOP);
     for(int i=0;i<segments;i++)

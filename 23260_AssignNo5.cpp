@@ -30,19 +30,19 @@ int main(int argc, char **argv)
 	int choice;
 	
 	cout<<"\nEnter the diagonally opposite co-ordinates of the clipping window:- "<<endl;
-	cout<<"\nBottom point:- ";
+	cout<<"\nBottom point:- "<<endl;
 	cout<<"Enter x coorinate:- ";
 	cin>>wx1;
 	cout<<"Enter y coordinate:- ";
 	cin>>wy1;
-	cout<<"\nTop point:- ";
+	cout<<"\nTop point:- "<<endl;
 	cout<<"Enter x coorinate:- ";
 	cin>>wx2;
 	cout<<"Enter y coordinate:- ";
 	cin>>wy2;
 	
 
-	cout<<"\nEnter the number of vertices of the polygon:- "<<endl;
+	cout<<"\nEnter the number of vertices of the polygon:- ";
 	cin>>n;
 	cout<<"\nEnter their coordinates:- "<<endl;
 	for(int i=0; i<n; i++)

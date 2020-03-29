@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <GLUT/GLUT.h>
+#include <GL/glut.h>
 //#include <GL/freeglut.h>
 #define inf 1000000
 
