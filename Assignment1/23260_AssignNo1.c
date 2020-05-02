@@ -4,7 +4,6 @@ Roll number:- 23260
 Batch:- H 10
 Problem Definition:- Draw the given pattern using
 line drawing algorithm
-Date of Performance:- 
 ===========================================================
 */
 

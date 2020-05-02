@@ -3,7 +3,6 @@
 Roll number:- 23260
 Batch:- H 10
 Problem Definition:- Mouse Click
-Date of Performance:- 
 ===========================================================
 */
 
