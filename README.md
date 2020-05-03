@@ -13,7 +13,7 @@
 ## Table of Contents for Assignments
 
 | Program Name                     | Problem Statement                    |
-| :-----------------------------:  | :--------------------------------:   |
+| :-----------------------------:  | :--------------------------------    |
 |[Assignment1.c](Assignment1/23260_AssignNo1.c)|Draw the given pattern using DDA and Bresenham line drawing algorithm.|
 |[Assignment2.c      ](Assignment2/23260_AssignNo2.c)|Draw inscribed and Circumscribed circles in the triangle as shown as an example below using circle drawing algorithm.|
 |[Assignment3(1).cpp ](Assignment3/23260_AssignNo3Click.cpp)|Mouse Click|
@@ -30,7 +30,7 @@
 ## Table of Contents for Other programs
 
 | Program Name                     | Description                          |
-| :-----------------------------:  | :--------------------------------:   |
+| :-----------------------------:  | :--------------------------------    |
 |[Necklace.cpp](Other/Necklace.cpp)|Necklace pattern|
 |[hashline.cpp](Other/hashline.c) |Hashline pattern|
 
